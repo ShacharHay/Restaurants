@@ -1,6 +1,5 @@
-<h1> Traveler </h1>
+<h1> Restaurants</h1>
 
-Android based application to allow users to login / register and then share their experiences from trips around the world.
-Used VM architecture and Firebase as database.
+Android Application which allow users to login / register and then share their Recommendations Used MVC architecture and Firebase as database.
 
-<img src="https://i.ibb.co/yy8VrJM/traveler.png" alt="traveler" border="0">
+<img src="https://ibb.co/txBphDb" border="0">
