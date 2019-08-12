@@ -44,6 +44,12 @@
             android:screenOrientation="portrait"/>
         <!--Main Screen Activity-->
 
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCGr0CQHPgMpwCLitd4McMcP1G7kqk9Ufs"/>
+
     </application>
 
 </manifest>

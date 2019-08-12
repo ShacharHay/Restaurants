@@ -23,6 +23,8 @@ import android.widget.TextView;
 
 
 import com.example.restaurants.Fragments.ContactUsFragment;
+
+import com.example.restaurants.Fragments.GmapFragment;
 import com.example.restaurants.Fragments.RestaurantsFragment;
 import com.example.restaurants.Fragments.HomeFragment;
 import com.example.restaurants.Fragments.AboutUsFragment;
@@ -176,6 +178,11 @@ public class MainScreenActivity extends AppCompatActivity {
                 fragmentClass = SavedFragment.class;
                 break;
 
+
+            case R.id.nav_map:
+
+                fragmentClass = GmapFragment.class;
+                break;
 
             case R.id.nav_logout:
                 menuItem.setChecked(false);
