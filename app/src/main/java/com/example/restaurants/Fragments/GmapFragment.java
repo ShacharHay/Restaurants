@@ -31,11 +31,12 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     MapView mMapView;
     View mView;
 
-
-    //
     SharedPreferences sharedPreferences;
     int locationCount;
-//
+
+    int countPosts;
+    String Markerd="FALSE";
+
 
     public GmapFragment() {
         // Required empty public constructor
@@ -75,9 +76,9 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap = googleMap;
         googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
 
-        //del if not work
         sharedPreferences=this.getActivity().getSharedPreferences("location",0);
         locationCount = sharedPreferences.getInt("locationCount", 0);
+
         // If locations are already saved
         if (locationCount != 0) {
             String title="";
@@ -87,74 +88,62 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             // Iterating through all the locations stored
             for (int i = 0; i < locationCount; i++) {
 
-                title=sharedPreferences.getString("title"+i,"0");
+                Markerd= sharedPreferences.getString("Markerd"+ i,"FALSE");
+                if(Markerd.equals("FALSE")) {
 
-                lat = sharedPreferences.getString("lat" + i, "0");
+                    title = sharedPreferences.getString("title" + i, "0");
 
-                lon = sharedPreferences.getString("lon" + i, "0");
+                    lat = sharedPreferences.getString("lat" + i, "0");
 
-                double lat_from_SP = Double.valueOf(lat).doubleValue();
+                    lon = sharedPreferences.getString("lon" + i, "0");
 
-                double lon_from_SP = Double.valueOf(lon).doubleValue();
+                    double lat_from_SP = Double.valueOf(lat).doubleValue();
 
-                this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(lat_from_SP, lon_from_SP)).title(title).snippet(""));
-                //test
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("locationCount", locationCount);
-                editor.commit();
-                //test
+                    double lon_from_SP = Double.valueOf(lon).doubleValue();
+
+                    countPosts = 1;
+
+                    for (int j = 0; j < locationCount; j++) {
+                        if (title.equals((sharedPreferences.getString("title" + j, "0")))) {
+                            countPosts++;
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("Markerd"+Integer.toString(j),"TRUE");
+                            editor.commit();
+                        }
+                    }
+
+
+                    countPosts = countPosts - 1;
+                    this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(lat_from_SP, lon_from_SP)).title(title).snippet("Posts:" + countPosts));
+                    countPosts = 0;
+
+                }
+
             }
+
+            for (int k = 0; k < locationCount; k++) {
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Markerd"+Integer.toString(k),"FALSE");
+                editor.commit();
+
+
+            }
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("locationCount", locationCount);
+
+            editor.commit();
 
         }
 
-        //del if not work
-
-
-
-
-        //  addExistsMarkers();
-
-
-        /*if (this.markerOptions != null && !this.markerOptions.isEmpty()) {
-            for (MarkerOptions markerOption : this.markerOptions) {
-                double lon = markerOption.getPosition().longitude;
-                double lat = markerOption.getPosition().latitude;
-                String title = markerOption.getTitle();
-                this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).title(title).snippet("from ok place"));
-
-
-            }
-        }*/ //to return afther test
-
-
     }
 
 
 
-    public  void placeMarker(String title,double lat,double lon) {
 
 
 
-
-
-/*
-      marker=new MarkerOptions();
-      marker.title(title);
-       marker.position(new LatLng(lat,lon));
-       marker = new MarkerOptions().title(title).position(new LatLng(lat, lon));
-        this.markerOptions.add(marker);
-*/ //return afther test
-
-    }
-
-    public void addExistsMarkers()
-    {
-        this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(31.046051,34.851612)).title("Israel"));
-        this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(23.634501,-102.552784)).title("Mexico"));
-        this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(	15.870032,100.992541)).title("Thailand"));
-        this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(41.87194,12.56738)).title("Italy"));
-        this.mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(18.220833,66.590149)).title("Puerto Rico"));
-    }
 
 
     @Override

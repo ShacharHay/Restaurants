@@ -105,6 +105,7 @@ public class PostNewFragment extends Fragment {
             }
         });
 
+        //send the String of location to get lat,lon of the location post
         getLatlanByCountryName(location);
     }
 
@@ -164,10 +165,11 @@ public class PostNewFragment extends Fragment {
         editor.putString("lat" + Integer.toString((locationCount - 1)), Double.toString(lat));
         editor.putString("lon" + Integer.toString((locationCount - 1)), Double.toString(lon));
 
+        /*for count posts*/
+        editor.putString("Markerd"+Integer.toString((locationCount - 1)),"FALSE");
+
         editor.putInt("locationCount", locationCount);
         editor.commit();
-
-
 
         //if (mMapFragment != null) {
         // mMapFragment.placeMarker(title, lat, lon);

@@ -34,7 +34,7 @@ import com.example.restaurants.Model.UserModel;
 import com.example.restaurants.Model.ZoomOutPageTransformer;
 import com.example.example.restaurants.R;
 
-//TODO CHANGE ALL THE WAY OF INITALIZING FRAGMENTS TO NEWINSTANCE
+
 
 //Is there a way to go back to a specific fragment?
 public class MainScreenActivity extends AppCompatActivity {

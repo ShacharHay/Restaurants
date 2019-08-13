@@ -271,7 +271,7 @@ public class HomeFragment extends Fragment {
         mRecentSearch.add(recentSearch2);
         mRecentSearch.add(recentSearch3);
 
-        //current location
+        //current location of the phone lat,lon
         GPSTracker gps = new GPSTracker(this.getContext());
         if(gps.canGetLocation()){
             String latitude = Double.toString(gps.getLatitude());
